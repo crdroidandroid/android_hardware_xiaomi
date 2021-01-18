@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The LineageOS Project
+ * Copyright (C) 2020-2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 #ifndef XIAOMI_FASTCHARGE_H
 #define XIAOMI_FASTCHARGE_H
 
+#define FASTCHARGE_DEFAULT_SETTING false
 #define FASTCHARGE_PATH "/sys/class/qcom-battery/sport_mode"
 
 #endif // XIAOMI_FASTCHARGE_H
