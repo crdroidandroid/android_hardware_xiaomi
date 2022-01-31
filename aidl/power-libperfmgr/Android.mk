@@ -33,8 +33,7 @@ LOCAL_SHARED_LIBRARIES := \
     libperfmgr \
     libprocessgroup \
     libutils \
-    pixel-power-ext-V1-ndk_platform \
-    vendor.lineage.power-V1-ndk_platform
+    pixel-power-ext-V1-ndk_platform
 
 LOCAL_SRC_FILES := \
     service.cpp \
@@ -42,8 +41,7 @@ LOCAL_SRC_FILES := \
     Power.cpp \
     PowerExt.cpp \
     PowerHintSession.cpp \
-    PowerSessionManager.cpp \
-    LineagePower.cpp
+    PowerSessionManager.cpp
 
 LOCAL_CFLAGS := -Wno-unused-parameter -Wno-unused-variable
 
