@@ -18,6 +18,13 @@ using aidl::android::hardware::health::Health;
 #if !CHARGER_FORCE_NO_UI
 using aidl::android::hardware::health::charger::ChargerCallback;
 using aidl::android::hardware::health::charger::ChargerModeMain;
+namespace aidl::android::hardware::health {
+class ChargerCallbackImpl : public ChargerCallback {
+  public:
+    ChargerCallbackImpl(const std::shared_ptr<Health>& service) : ChargerCallback(service) {}
+    bool ChargerEnableSuspend() override { return true; }
+};
+} //namespace aidl::android::hardware::health
 #endif
 
 static constexpr const char* gInstanceName = "default";
@@ -78,7 +85,8 @@ int main(int argc, char** argv) {
     if (argc >= 2 && argv[1] == gChargerArg) {
 #if !CHARGER_FORCE_NO_UI
         KLOG_INFO(LOG_TAG, "Starting charger mode with UI.");
-        return ChargerModeMain(binder, std::make_shared<ChargerCallback>(binder));
+        auto charger_callback = std::make_shared<aidl::android::hardware::health::ChargerCallbackImpl>(binder);
+        return ChargerModeMain(binder, charger_callback);
 #endif
         KLOG_INFO(LOG_TAG, "Starting charger mode without UI.");
     } else {
