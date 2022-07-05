@@ -31,6 +31,7 @@ cc_defaults {
 
 cc_binary {
     name: "android.hardware.health-service.qti",
+    recovery: false,
     vendor: true,
     defaults: ["android.hardware.health-service.qti-defaults"],
     init_rc: ["android.hardware.health-service.qti.rc"],
@@ -39,7 +40,8 @@ cc_binary {
 
 cc_binary {
     name: "android.hardware.health-service.qti_recovery",
-    vendor: true,
+    vendor: false,
+    recovery: true,
     defaults: ["android.hardware.health-service.qti-defaults"],
     init_rc: ["android.hardware.health-service.qti_recovery.rc"],
     overrides: ["charger.recovery"],
