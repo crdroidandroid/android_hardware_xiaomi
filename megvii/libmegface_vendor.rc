@@ -1,0 +1,6 @@
+# hack to mount libmegface_vendor as libmegface
+# as we cant build libmegface with faceunlock 
+# as of faceunlock has similar target
+
+on post-fs
+    mount none /vendor/lib64/libmegface_vendor.so /vendor/lib64/libmegface.so bind

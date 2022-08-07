@@ -18,6 +18,16 @@ cc_library_shared {
 }
 
 cc_library_shared {
-    name: "libmegface",
+    name: "libmegface_vendor",
+    required: [
+        "libmegface_vendor.rc",
+    ],
+    vendor: true,
+}
+
+prebuilt_etc {
+    name: "libmegface_vendor.rc",
+    src: "libmegface_vendor.rc",
+    sub_dir: "init",
     vendor: true,
 }
