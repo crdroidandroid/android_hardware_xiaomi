@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
-#define LOG_TAG "android.hardware.health-service.qti"
+#define LOG_TAG "android.hardware.health-service.xiaomi"
 
 #include <android-base/logging.h>
 #include <android/binder_interface_utils.h>

@@ -1,7 +1,7 @@
 cc_defaults {
-    name: "android.hardware.health-service.qti-defaults",
+    name: "android.hardware.health-service.xiaomi-defaults",
     relative_install_path: "hw",
-    vintf_fragments: ["android.hardware.health-service.qti.xml"],
+    vintf_fragments: ["android.hardware.health-service.xiaomi.xml"],
     vendor: true,
     recovery_available: true,
 
@@ -30,19 +30,19 @@ cc_defaults {
 }
 
 cc_binary {
-    name: "android.hardware.health-service.qti",
+    name: "android.hardware.health-service.xiaomi",
     recovery: false,
     vendor: true,
-    defaults: ["android.hardware.health-service.qti-defaults"],
-    init_rc: ["android.hardware.health-service.qti.rc"],
+    defaults: ["android.hardware.health-service.xiaomi-defaults"],
+    init_rc: ["android.hardware.health-service.xiaomi.rc"],
     overrides: ["charger"],
 }
 
 cc_binary {
-    name: "android.hardware.health-service.qti_recovery",
+    name: "android.hardware.health-service.xiaomi_recovery",
     vendor: false,
     recovery: true,
-    defaults: ["android.hardware.health-service.qti-defaults"],
-    init_rc: ["android.hardware.health-service.qti_recovery.rc"],
+    defaults: ["android.hardware.health-service.xiaomi-defaults"],
+    init_rc: ["android.hardware.health-service.xiaomi_recovery.rc"],
     overrides: ["charger.recovery"],
 }
