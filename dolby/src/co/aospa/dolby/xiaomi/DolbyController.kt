@@ -121,6 +121,13 @@ internal class DolbyController private constructor(
             prefs.getString(DolbyConstants.PREF_PRESET, getPreset(profile))!!,
             profile
         )
+        setIeqPreset(
+            prefs.getString(
+                DolbyConstants.PREF_IEQ,
+                getIeqPreset(profile).toString()
+            )!!.toInt(),
+            profile
+        )
         setHeadphoneVirtEnabled(
             prefs.getBoolean(DolbyConstants.PREF_HP_VIRTUALIZER, getHeadphoneVirtEnabled(profile)),
             profile
@@ -281,6 +288,17 @@ internal class DolbyController private constructor(
         checkEffect()
         dolbyEffect.setDapParameter(DsParam.DIALOGUE_ENHANCER_ENABLE, (value > 0), profile)
         dolbyEffect.setDapParameter(DsParam.DIALOGUE_ENHANCER_AMOUNT, value, profile)
+    }
+
+    fun getIeqPreset(profile: Int = this.profile) =
+        dolbyEffect.getDapParameterInt(DsParam.IEQ_PRESET, profile).also {
+            dlog(TAG, "getIeqPreset: $it")
+        }
+
+    fun setIeqPreset(value: Int, profile: Int = this.profile) {
+        dlog(TAG, "setIeqPreset: $value")
+        checkEffect()
+        dolbyEffect.setDapParameter(DsParam.IEQ_PRESET, value, profile)
     }
 
     companion object {

@@ -61,4 +61,10 @@
     <string name="dolby_geq_preset_name_exists">Preset name already exists!</string>
     <string name="dolby_geq_preset_name_too_long">Preset name is too long!</string>
 
+    <!-- Dolby intelligent EQ -->
+    <string name="dolby_ieq">Intelligent equalizer</string>
+    <string name="dolby_balanced">Balanced</string>
+    <string name="dolby_warm">Warm</string>
+    <string name="dolby_detailed">Detailed</string>
+
 </resources>

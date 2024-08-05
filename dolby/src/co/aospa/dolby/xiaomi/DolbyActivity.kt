@@ -7,6 +7,7 @@
 package co.aospa.dolby.xiaomi
 
 import android.os.Bundle
+import co.aospa.dolby.xiaomi.preference.DolbySettingsFragment
 import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity
 
 private const val TAG = "DolbyActivity"
