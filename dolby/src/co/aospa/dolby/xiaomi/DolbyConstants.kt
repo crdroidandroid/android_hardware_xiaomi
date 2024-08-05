@@ -14,6 +14,7 @@ class DolbyConstants {
         HEADPHONE_VIRTUALIZER(101),
         SPEAKER_VIRTUALIZER(102),
         VOLUME_LEVELER_ENABLE(103),
+        IEQ_PRESET(104),
         DIALOGUE_ENHANCER_ENABLE(105),
         DIALOGUE_ENHANCER_AMOUNT(108),
         GEQ_BAND_GAINS(110, 20),
@@ -30,6 +31,7 @@ class DolbyConstants {
         const val PREF_ENABLE = "dolby_enable"
         const val PREF_PROFILE = "dolby_profile"
         const val PREF_PRESET = "dolby_preset"
+        const val PREF_IEQ = "dolby_ieq"
         const val PREF_HP_VIRTUALIZER = "dolby_virtualizer"
         const val PREF_SPK_VIRTUALIZER = "dolby_spk_virtualizer"
         const val PREF_STEREO = "dolby_stereo"
@@ -40,6 +42,7 @@ class DolbyConstants {
 
         val PROFILE_SPECIFIC_PREFS = setOf(
             PREF_PRESET,
+            PREF_IEQ,
             PREF_HP_VIRTUALIZER,
             PREF_SPK_VIRTUALIZER,
             PREF_STEREO,
