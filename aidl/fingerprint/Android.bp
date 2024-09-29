@@ -4,45 +4,12 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-soong_config_module_type {
-    name: "biometric_xiaomi_cc_defaults",
-    module_type: "cc_defaults",
-    config_namespace: "BIOMETRIC_XIAOMI",
-    bool_variables: [
-        "USES_UDFPS_SENSOR",
-    ],
-    value_variables: [
-        "UDFPS_LOCATION_X",
-        "UDFPS_LOCATION_Y",
-        "UDFPS_RADIUS",
-    ],
-    properties: ["cppflags"],
-}
-
-biometric_xiaomi_cc_defaults {
-    name: "biometric_xiaomi_defaults",
-    soong_config_variables: {
-        USES_UDFPS_SENSOR: {
-            cppflags: ["-DUSES_UDFPS_SENSOR"],
-        },
-        UDFPS_LOCATION_X: {
-            cppflags: ["-DUDFPS_LOCATION_X=%s"],
-        },
-        UDFPS_LOCATION_Y: {
-            cppflags: ["-DUDFPS_LOCATION_Y=%s"],
-        },
-        UDFPS_RADIUS: {
-            cppflags: ["-DUDFPS_RADIUS=%s"],
-        },
-    },
-}
-
 cc_binary {
     name: "android.hardware.biometrics.fingerprint-service.xiaomi",
     relative_install_path: "hw",
     init_rc: ["android.hardware.biometrics.fingerprint-service.xiaomi.rc"],
     vintf_fragments: ["android.hardware.biometrics.fingerprint-service.xiaomi.xml"],
-    defaults: ["biometric_xiaomi_defaults"],
+    static_libs: ["libandroid.hardware.biometrics.fingerprint.XiaomiProps"],
     srcs: [
         "CancellationSignal.cpp",
         "Fingerprint.cpp",
@@ -91,4 +58,11 @@ cc_library_static {
         thin: true,
     },
     whole_program_vtables: true,
+}
+
+sysprop_library {
+    name: "android.hardware.biometrics.fingerprint.XiaomiProps",
+    srcs: ["fingerprint.sysprop"],
+    property_owner: "Vendor",
+    vendor: true,
 }

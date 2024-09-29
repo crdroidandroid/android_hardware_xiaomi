@@ -6,9 +6,12 @@
 
 #include "Fingerprint.h"
 
-#include <android-base/logging.h>
-#include <cutils/properties.h>
+#include <fingerprint.sysprop.h>
 
+#include <android-base/logging.h>
+#include <android-base/parseint.h>
+#include <android-base/strings.h>
+#include <cutils/properties.h>
 
 namespace {
 
@@ -27,6 +30,11 @@ static const fingerprint_hal_t kModules[] = {
 };
 
 }  // anonymous namespace
+
+using namespace ::android::fingerprint::xiaomi;
+
+using ::android::base::ParseInt;
+using ::android::base::Split;
 
 namespace aidl {
 namespace android {
@@ -52,17 +60,26 @@ static const uint16_t kVersion = HARDWARE_MODULE_API_VERSION(2, 1);
 static Fingerprint* sInstance;
 
 Fingerprint::Fingerprint()
-#ifdef USES_UDFPS_SENSOR
-      : mSensorType(FingerprintSensorType::UNDER_DISPLAY_OPTICAL),
-#else
-      : mSensorType(FingerprintSensorType::UNKNOWN),
-#endif
-      mMaxEnrollmentsPerUser(MAX_ENROLLMENTS_PER_USER),
+    : mMaxEnrollmentsPerUser(MAX_ENROLLMENTS_PER_USER),
       mSupportsGestures(false),
       mDevice(nullptr),
       mUdfpsHandlerFactory(nullptr),
       mUdfpsHandler(nullptr) {
     sInstance = this;  // keep track of the most recent instance
+
+    if (FingerprintHalProperties::type().value_or("") == "" || FingerprintHalProperties::type().value_or("") == "default" || FingerprintHalProperties::type().value_or("") == "rear")
+        mSensorType = FingerprintSensorType::REAR;
+    else if (FingerprintHalProperties::type().value_or("") == "udfps")
+        mSensorType = FingerprintSensorType::UNDER_DISPLAY_ULTRASONIC;
+    else if (FingerprintHalProperties::type().value_or("") == "udfps_optical")
+        mSensorType = FingerprintSensorType::UNDER_DISPLAY_OPTICAL;
+    else if (FingerprintHalProperties::type().value_or("") == "side")
+        mSensorType = FingerprintSensorType::POWER_BUTTON;
+    else if (FingerprintHalProperties::type().value_or("") == "home")
+        mSensorType = FingerprintSensorType::HOME_BUTTON;
+    else
+        mSensorType = FingerprintSensorType::UNKNOWN;
+
     for (auto& [class_name] : kModules) {
         mDevice = openHal(class_name);
         if (!mDevice) {
@@ -78,23 +95,23 @@ Fingerprint::Fingerprint()
         ALOGE("Can't open any HAL module");
     }
 
-#ifdef USES_UDFPS_SENSOR
-    ALOGI("UNDER_DISPLAY_OPTICAL selected");
-    mUdfpsHandlerFactory = getUdfpsHandlerFactory();
+    std::string sensorTypeProp = FingerprintHalProperties::type().value_or("");
+    if (sensorTypeProp == "udfps" || sensorTypeProp == "udfps_optical"){
+        ALOGI("UNDER_DISPLAY_OPTICAL selected");
+        mUdfpsHandlerFactory = getUdfpsHandlerFactory();
 
-    if (!mUdfpsHandlerFactory) {
-        ALOGE("Can't get UdfpsHandlerFactory");
-    } else {
-        mUdfpsHandler = mUdfpsHandlerFactory->create();
-
-        if (!mUdfpsHandler) {
-            ALOGE("Can't create UdfpsHandler");
+        if (!mUdfpsHandlerFactory) {
+            ALOGE("Can't get UdfpsHandlerFactory");
         } else {
-            mUdfpsHandler->init(mDevice);
+            mUdfpsHandler = mUdfpsHandlerFactory->create();
+
+            if (!mUdfpsHandler) {
+                ALOGE("Can't create UdfpsHandler");
+            } else {
+                mUdfpsHandler->init(mDevice);
+            }
         }
     }
-#endif
-
 }
 
 fingerprint_device_t* Fingerprint::openHal(const char* class_name) {
@@ -170,25 +187,21 @@ ndk::ScopedAStatus Fingerprint::getSensorProps(std::vector<SensorProps>* out) {
     };
 
     SensorLocation sensorLocation;
-    int32_t x = -1, y = -1, r = -1;
+    std::string loc = FingerprintHalProperties::sensor_location().value_or("");
+    std::vector<std::string> dim = Split(loc, "|");
+    if (dim.size() >= 3 && dim.size() <= 4) {
+        ParseInt(dim[0], &sensorLocation.sensorLocationX);
+        ParseInt(dim[1], &sensorLocation.sensorLocationY);
+        ParseInt(dim[2], &sensorLocation.sensorRadius);
 
-#ifdef USES_UDFPS_SENSOR
-    x = UDFPS_LOCATION_X;
-    y = UDFPS_LOCATION_Y;
-    r = UDFPS_RADIUS;
-#endif
-
-    if (x >= 0 && y >= 0 && r >= 0) {
-        sensorLocation.sensorLocationX = x;
-        sensorLocation.sensorLocationY = y;
-        sensorLocation.sensorRadius = r;
-    } else {
-        ALOGE("Failed to get sensor location: %d, %d, %d", x, y, r);
+        if (dim.size() >= 4)
+            sensorLocation.display = dim[3];
+    } else if(loc.length() > 0) {
+        LOG(WARNING) << "Invalid sensor location input (x|y|radius|display): " << loc;
     }
 
-    ALOGI("Sensor type: %s, location: %s", 
-          ::android::internal::ToString(mSensorType).c_str(), 
-          sensorLocation.toString().c_str());
+    LOG(INFO) << "Sensor type: " << ::android::internal::ToString(mSensorType)
+              << " location: " << sensorLocation.toString();
 
     *out = {{
         commonProps,

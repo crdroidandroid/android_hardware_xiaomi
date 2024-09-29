@@ -1,0 +1,24 @@
+# fingerprint.sysprop
+# module becomes static class (Java) / namespace (C++) for serving API
+module: "android.fingerprint.xiaomi.FingerprintHalProperties"
+owner: Vendor
+
+# type of fingerprint sensor
+prop {
+    prop_name: "ro.vendor.fingerprint.type"
+    type: String
+    scope: Internal
+    access: Readonly
+    enum_values: "default|rear|udfps|udfps_optical|side|home"
+    api_name: "type"
+}
+
+# sensor location
+#    <x>|<y>|<radius>|display in pixel
+prop {
+    prop_name: "ro.vendor.fingerprint.sensor_location"
+    type: String
+    scope: Internal
+    access: Readonly
+    api_name: "sensor_location"
+}
