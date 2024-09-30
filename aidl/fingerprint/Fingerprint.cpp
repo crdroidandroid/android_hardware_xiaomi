@@ -67,15 +67,16 @@ Fingerprint::Fingerprint()
       mUdfpsHandler(nullptr) {
     sInstance = this;  // keep track of the most recent instance
 
-    if (FingerprintHalProperties::type().value_or("") == "" || FingerprintHalProperties::type().value_or("") == "default" || FingerprintHalProperties::type().value_or("") == "rear")
+    std::string sensorTypeProp = FingerprintHalProperties::type().value_or("");
+    if (sensorTypeProp == "" || sensorTypeProp == "default" || sensorTypeProp == "rear")
         mSensorType = FingerprintSensorType::REAR;
-    else if (FingerprintHalProperties::type().value_or("") == "udfps")
+    else if (sensorTypeProp == "udfps")
         mSensorType = FingerprintSensorType::UNDER_DISPLAY_ULTRASONIC;
-    else if (FingerprintHalProperties::type().value_or("") == "udfps_optical")
+    else if (sensorTypeProp == "udfps_optical")
         mSensorType = FingerprintSensorType::UNDER_DISPLAY_OPTICAL;
-    else if (FingerprintHalProperties::type().value_or("") == "side")
+    else if (sensorTypeProp == "side")
         mSensorType = FingerprintSensorType::POWER_BUTTON;
-    else if (FingerprintHalProperties::type().value_or("") == "home")
+    else if (sensorTypeProp == "home")
         mSensorType = FingerprintSensorType::HOME_BUTTON;
     else
         mSensorType = FingerprintSensorType::UNKNOWN;
@@ -95,7 +96,6 @@ Fingerprint::Fingerprint()
         ALOGE("Can't open any HAL module");
     }
 
-    std::string sensorTypeProp = FingerprintHalProperties::type().value_or("");
     if (sensorTypeProp == "udfps" || sensorTypeProp == "udfps_optical"){
         ALOGI("UNDER_DISPLAY_OPTICAL selected");
         mUdfpsHandlerFactory = getUdfpsHandlerFactory();
