@@ -18,8 +18,7 @@
         android:entryValues="@array/dolby_profile_values"
         android:defaultValue="0"
         android:title="@string/dolby_profile_title"
-        android:summary="%s"
-        android:icon="@drawable/ic_dolby" />
+        android:summary="%s" />
 
     <PreferenceCategory
         android:title="@string/dolby_category_settings">
