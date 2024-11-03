@@ -27,13 +27,12 @@
     <string name="dolby_volume_leveler">Volume leveler</string>
     <string name="dolby_connect_headphones">Connect headphones</string>
     <string name="dolby_reset_profile">Reset to defaults</string>
-    <string name="dolby_reset_profile_toast">Succesfully reset settings for %1$s profile</string>
+    <string name="dolby_reset_profile_toast">Successfully reset settings for %1$s profile</string>
 
     <!-- Dolby profiles -->
     <string name="dolby_profile_dynamic">Dynamic</string>
-    <string name="dolby_profile_video">Movie/Video</string>
+    <string name="dolby_profile_movie">Movie</string>
     <string name="dolby_profile_music">Music</string>
-    <string name="dolby_profile_voice">Voice</string>
 
     <!-- Dolby equalizer presets -->
     <string name="dolby_preset_default">Flat (off)</string>
