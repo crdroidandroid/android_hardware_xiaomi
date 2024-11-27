@@ -174,6 +174,13 @@ internal class DolbyController private constructor(
         profile = prefs.getString(DolbyConstants.PREF_PROFILE, "0" /*dynamic*/)!!.toInt()
     }
 
+    fun setDsOnAndPersist(dsOn: Boolean) {
+        this.dsOn = dsOn
+        PreferenceManager.getDefaultSharedPreferences(context).edit()
+            .putBoolean(DolbyConstants.PREF_ENABLE, dsOn)
+            .apply()
+    }
+
     fun getProfileName(): String? {
         val profile = dolbyEffect.profile.toString()
         val profiles = context.resources.getStringArray(R.array.dolby_profile_values)
