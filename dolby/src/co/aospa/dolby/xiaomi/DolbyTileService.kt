@@ -26,7 +26,7 @@ class DolbyTileService : TileService() {
 
     override fun onClick() {
         val isDsOn = dolbyController.dsOn
-        dolbyController.dsOn = !isDsOn
+        dolbyController.setDsOnAndPersist(!isDsOn) // toggle
         qsTile.apply {
             state = if (isDsOn) Tile.STATE_INACTIVE else Tile.STATE_ACTIVE
             updateTile()
