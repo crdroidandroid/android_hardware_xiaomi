@@ -11,12 +11,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.android.settingslib.spa.framework.theme.settingsBackground
 import com.android.settingslib.spa.framework.theme.SettingsDimension
-import com.android.settingslib.spa.framework.theme.SettingsTheme
 
 @Composable
 fun EqualizerScreen(
@@ -28,7 +29,7 @@ fun EqualizerScreen(
             .fillMaxSize()
             .padding(SettingsDimension.itemPadding)
             .then(modifier),
-        color = SettingsTheme.colorScheme.background
+        color = MaterialTheme.colorScheme.settingsBackground
     ) {
         Column(
             verticalArrangement = Arrangement.Top,
