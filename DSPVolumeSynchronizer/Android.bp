@@ -1,0 +1,39 @@
+//
+// Copyright (C) 2024-2025 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_app {
+    name: "DSPVolumeSynchronizer",
+    certificate: "platform",
+    srcs: ["src/**/*.java"],
+    platform_apis: true,
+    privileged: true,
+    system_ext_specific: true,
+    static_libs: [
+        "androidx.core_core",
+        "SettingsLib",
+    ],
+
+    required: [
+        "privapp-permissions-dspvolume",
+        "config-dspvolume",
+    ],
+}
+
+prebuilt_etc {
+    name: "privapp-permissions-dspvolume",
+    relative_install_path: "permissions",
+    src: "privapp-permissions-dspvolume.xml",
+    system_ext_specific: true,
+    filename_from_src: true,
+}
+
+prebuilt_etc {
+    name: "config-dspvolume",
+    relative_install_path: "sysconfig",
+    src: "config-dspvolume.xml",
+    system_ext_specific: true,
+    filename_from_src: true,
+}
