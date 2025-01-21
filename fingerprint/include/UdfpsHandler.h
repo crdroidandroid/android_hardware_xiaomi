@@ -18,6 +18,8 @@ class UdfpsHandler {
     virtual void onFingerUp() {};
 
     virtual void onAcquired(int32_t result, int32_t vendorCode) {};
+    virtual void onAuthenticationSucceeded() {};
+    virtual void onAuthenticationFailed() {};
     virtual void cancel() {};
 };
 

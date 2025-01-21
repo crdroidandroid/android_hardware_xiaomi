@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The LineageOS Project
+ * Copyright (C) 2024-2025 The LineageOS Project
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -364,9 +364,15 @@ void Session::notify(const fingerprint_msg_t* msg) {
                 HardwareAuthToken authToken;
                 translate(hat, authToken);
 
+                if (mUdfpsHandler) {
+                    mUdfpsHandler->onAuthenticationSucceeded();
+                }
                 mCb->onAuthenticationSucceeded(msg->data.authenticated.finger.fid, authToken);
                 mLockoutTracker.reset(true);
             } else {
+                if (mUdfpsHandler) {
+                    mUdfpsHandler->onAuthenticationFailed();
+                }
                 mCb->onAuthenticationFailed();
                 mLockoutTracker.addFailedAttempt();
                 checkSensorLockout();
