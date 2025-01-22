@@ -19,6 +19,7 @@ android_app {
     required: [
         "privapp-permissions-dspvolume",
         "config-dspvolume",
+        "preinstalled-packages-platform-dspvolume",
     ],
 }
 
@@ -34,6 +35,14 @@ prebuilt_etc {
     name: "config-dspvolume",
     relative_install_path: "sysconfig",
     src: "config-dspvolume.xml",
+    system_ext_specific: true,
+    filename_from_src: true,
+}
+
+prebuilt_etc {
+    name: "preinstalled-packages-platform-dspvolume",
+    relative_install_path: "sysconfig",
+    src: "preinstalled-packages-platform-dspvolume.xml",
     system_ext_specific: true,
     filename_from_src: true,
 }
