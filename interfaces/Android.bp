@@ -1,3 +1,8 @@
+//
+// SPDX-FileCopyrightText: 2020-2025 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
 hidl_package_root {
     name: "com.fingerprints",
     path: "hardware/xiaomi/interfaces/fingerprints",
@@ -11,4 +16,130 @@ hidl_package_root {
 hidl_package_root {
     name: "vendor.xiaomi",
     path: "hardware/xiaomi/interfaces/xiaomi",
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_com_fingerprints_extension_interface",
+    interfaces: [
+        "com.fingerprints.extension@3.0::IFingerprintAuthenticator",
+        "com.fingerprints.extension@3.0::IFingerprintCalibration",
+        "com.fingerprints.extension@3.0::IFingerprintEngineering",
+        "com.fingerprints.extension@3.0::IFingerprintNavigation",
+        "com.fingerprints.extension@3.0::IFingerprintOptical",
+        "com.fingerprints.extension@3.0::IFingerprintRecalibration",
+        "com.fingerprints.extension@3.0::IFingerprintSenseTouch",
+        "com.fingerprints.extension@3.0::IFingerprintSensorTest",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_focaltech_fingerprint_interface",
+    interfaces: [
+        "vendor.focaltech.fingerprint@1.0::IFocalFingerprintService",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_goodix_hardware_cap_biometrics_fingerprint_interface",
+    interfaces: [
+        "vendor.goodix.hardware.cap.biometrics.fingerprint@2.1::IGoodixFingerprintDaemon",
+        "vendor.goodix.hardware.cap.biometrics.fingerprint@2.1::IGoodixFingerprintDaemonExt",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_pixelworks_hardware_display_interface",
+    interfaces: [
+        "vendor.pixelworks.hardware.display@1.0::IIris",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_silead_hardware_fingerprintext_interface",
+    interfaces: [
+        "vendor.silead.hardware.fingerprintext@1.0::ISileadFingerprint",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_synaptics_fingerprints_interfaces_extensions_interface",
+    interfaces: [
+        "vendor.synaptics.fingerprints.interfaces.extensions@1.0::IFpCollection",
+        "vendor.synaptics.fingerprints.interfaces.extensions@1.0::INavigation",
+        "vendor.synaptics.fingerprints.interfaces.extensions@1.0::ISensorTest",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_xiaomi_hardware_bgservice_interface",
+    interfaces: [
+        "vendor.xiaomi.hardware.bgservice@1.0::IBGService",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_xiaomi_hardware_cameraperf_interface",
+    interfaces: [
+        "vendor.xiaomi.hardware.cameraperf@1.0::IMiCameraPerfService",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_xiaomi_hardware_campostproc_interface",
+    interfaces: [
+        "vendor.xiaomi.hardware.campostproc@1.0::IMiPostProcService",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_xiaomi_hardware_citsensorservice_interface",
+    interfaces: [
+        "vendor.xiaomi.hardware.citsensorservice@1.0::ICitSensorService",
+        "vendor.xiaomi.hardware.citsensorservice@1.1::ICitSensorService",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_xiaomi_hardware_dtool_interface",
+    interfaces: [
+        "vendor.xiaomi.hardware.dtool@1.0::IDtool",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_xiaomi_hardware_micharge_interface",
+    interfaces: [
+        "vendor.xiaomi.hardware.micharge@1.0::IMiCharge",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_xiaomi_hardware_quickcamera_interface",
+    interfaces: [
+        "vendor.xiaomi.hardware.quickcamera@1.0::IQuickCameraService",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_xiaomi_hardware_tidaservice_interface",
+    interfaces: [
+        "vendor.xiaomi.hardware.tidaservice@1.0::ITidaService",
+        "vendor.xiaomi.hardware.tidaservice@1.1::ITidaService",
+        "vendor.xiaomi.hardware.tidaservice@1.2::ITidaService",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_xiaomi_sensor_citsensorservice_interface",
+    interfaces: [
+        "vendor.xiaomi.sensor.citsensorservice@1.1::ICitSensorService",
+        "vendor.xiaomi.sensor.citsensorservice@2.0::ICitSensorService",
+    ],
+}
+
+prebuilt_hidl_interfaces {
+    name: "hidl_vendor_xiaomi_sensor_communicate_interface",
+    interfaces: [
+        "vendor.xiaomi.sensor.communicate@1.0::ISensorCommunicate",
+    ],
 }
