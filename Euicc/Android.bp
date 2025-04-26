@@ -24,6 +24,35 @@ android_app {
     ],
 }
 
+android_app_import {
+    name: "EuiccGoogle",
+    owner: "xiaomi",
+    apk: "proprietary/product/priv-app/EuiccGoogle/EuiccGoogle.apk",
+    preprocessed: true,
+    presigned: true,
+    dex_preopt: {
+        enabled: false,
+    },
+    privileged: true,
+    product_specific: true,
+}
+
+prebuilt_etc {
+    sub_dir: "default-permissions",
+    name: "default-permissions-euicc.xml",
+    filename: "default-permissions-euicc.xml",
+    src: "default-permissions-euicc.xml",
+    product_specific: true,
+}
+
+prebuilt_etc {
+    sub_dir: "permissions",
+    name: "privapp-permissions-euiccgoogle.xml",
+    filename: "privapp-permissions-euiccgoogle.xml",
+    src: "privapp-permissions-euiccgoogle.xml",
+    product_specific: true,
+}
+
 prebuilt_etc {
     sub_dir: "permissions",
     name: "co.aospa.euicc.xml",
