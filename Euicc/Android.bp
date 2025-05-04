@@ -21,6 +21,7 @@ android_app {
     required: [
         "co.aospa.euicc.xml",
         "hidden-api-whitelist-co.aospa.euicc.xml",
+        "EuiccGoogle",
     ],
 }
 
@@ -35,6 +36,10 @@ android_app_import {
     },
     privileged: true,
     product_specific: true,
+    required: [
+        "default-permissions-euicc.xml",
+        "privapp-permissions-euiccgoogle.xml",
+    ],
 }
 
 prebuilt_etc {
