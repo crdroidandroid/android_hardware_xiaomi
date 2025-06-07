@@ -1,36 +1,19 @@
 //
-// Copyright (C) 2022 The LineageOS Project
-//
+// SPDX-FileCopyrightText: 2022-2025 The LineageOS Project
 // SPDX-License-Identifier: Apache-2.0
 //
 
-soong_config_module_type {
-    name: "xiaomi_touch_hal_cc_defaults",
-    module_type: "cc_defaults",
-    config_namespace: "XIAOMI_TOUCH",
-    value_variables: ["HIGH_TOUCH_POLLING_PATH"],
-    properties: ["cppflags"],
-}
-
-xiaomi_touch_hal_cc_defaults {
-    name: "xiaomi_touch_hal_defaults",
-    soong_config_variables: {
-        HIGH_TOUCH_POLLING_PATH: {
-            cppflags: ["-DHIGH_TOUCH_POLLING_PATH=\"%s\""],
-        },
-    },
-}
-
 cc_binary {
     name: "vendor.lineage.touch@1.0-service.xiaomi",
-    defaults: [
-        "hidl_defaults",
-        "xiaomi_touch_hal_defaults",
-    ],
+    defaults: ["hidl_defaults"],
     vintf_fragments: ["vendor.lineage.touch@1.0-service.xiaomi.xml"],
     init_rc: ["vendor.lineage.touch@1.0-service.xiaomi.rc"],
     relative_install_path: "hw",
     proprietary: true,
+    cppflags: select(soong_config_variable("XIAOMI_TOUCH", "HIGH_TOUCH_POLLING_PATH"), {
+        any @ flag_val: ["-DHIGH_TOUCH_POLLING_PATH=\"" + flag_val + "\""],
+        default: [],
+    }),
     srcs: [
         "HighTouchPollingRate.cpp",
         "service.cpp",
