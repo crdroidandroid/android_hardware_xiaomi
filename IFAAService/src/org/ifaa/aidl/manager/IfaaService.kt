@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2022-2024 The LineageOS Project
+ * SPDX-FileCopyrightText: 2022-2025 The LineageOS Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -46,11 +46,11 @@ class IfaaService : Service() {
 
         override fun startBIOManager(authType: Int) = when (authType) {
             AUTH_TYPE_FINGERPRINT -> {
-                val intent = Intent(Settings.ACTION_SECURITY_SETTINGS).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
-
-                applicationContext.startActivity(intent)
+                applicationContext.startActivity(
+                    Intent(Settings.ACTION_SECURITY_SETTINGS).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                )
 
                 COMMAND_OK
             }
