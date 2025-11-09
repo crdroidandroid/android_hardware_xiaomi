@@ -1,0 +1,36 @@
+type parts_app, domain;
+typeattribute parts_app mlstrustedsubject;
+
+app_domain(parts_app)
+
+binder_use(parts_app)
+
+allow parts_app {
+  activity_service
+  activity_task_service
+  audio_service
+  audioserver_service
+  autofill_service
+  batteryproperties_service
+  batterystats_service
+  content_capture_service
+  game_service
+  gpu_service
+  hint_service
+  media_session_service
+  netstats_service
+  radio_service
+  trust_service
+  sensorservice_service
+  surfaceflinger_service
+  vendor_perf_service
+  vibrator_manager_service
+  voiceinteraction_service
+}:service_manager find;
+
+allow parts_app system_app_data_file:dir create_dir_perms;
+allow parts_app system_app_data_file:{
+  file
+  lnk_file
+} create_file_perms;
+

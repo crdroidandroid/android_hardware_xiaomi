@@ -1,42 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Copyright (C) 2023-2024 The LineageOS Project
-    SPDX-License-Identifier: Apache-2.0
+     Copyright (C) 2023-2025 Paranoid Android
+
+     SPDX-License-Identifier: Apache-2.0
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="co.aospa.euicc">
+    package="com.xiaomi.settings"
+    android:versionCode="1"
+    android:versionName="1.0"
+    android:sharedUserId="android.uid.system">
 
-    <queries>
-        <package android:name="com.google.android.gms" />
-        <package android:name="com.google.android.gsf" />
-        <package android:name="com.google.android.euicc" />
-        <package android:name="com.google.android.ims" />
-    </queries>
-
+    <uses-permission android:name="android.permission.ACCESS_SURFACE_FLINGER" />
     <uses-permission android:name="android.permission.CHANGE_COMPONENT_ENABLED_STATE" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS" />
 
+    <uses-sdk
+        android:minSdkVersion="31"
+        android:targetSdkVersion="31"/>
+
     <application
+        android:label="@string/app_name"
         android:persistent="true"
-        android:usesNonSdkApi="true">
-        <receiver
+        android:defaultToDeviceProtectedStorage="true"
+        android:directBootAware="true">
+
+        <uses-library
+            android:name="com.qualcomm.qcrilhook"
             android:exported="true"
-            android:name=".BootCompletedReceiver">
+            android:required="false"/>
+        <uses-library
+            android:name="com.qti.extphone.extphonelib"
+            android:exported="true"
+            android:required="false"/>
+
+        <receiver
+            android:name=".BootCompletedReceiver"
+            android:exported="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
-        <receiver
-            android:directBootAware="true"
+        <activity
+            android:name=".telephony.EsimSettingsActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="true"
-            android:name=".EuiccReceiver"
-            android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS">
+            android:label="@string/esim_title"
+            android:theme="@style/Theme.SubSettingsBase">
             <intent-filter>
-                <action android:name="com.google.android.euicc.action.PARTNER_CUSTOMIZATION"/>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
             </intent-filter>
-        </receiver>
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.wireless" />
+            <meta-data
+                android:name="com.android.settings.summary_uri"
+                android:value="content://com.xiaomi.settings.device.summary/esim" />
+            <meta-data
+                android:name="com.android.settings.icon"
+                android:resource="@drawable/ic_sim_card_download" />
+            <meta-data
+                android:name="com.android.settings.order"
+                android:value="-10" />
+        </activity>
+
+        <provider
+            android:name=".SummaryProvider"
+            android:authorities="com.xiaomi.settings.device.summary">
+        </provider>
     </application>
 </manifest>

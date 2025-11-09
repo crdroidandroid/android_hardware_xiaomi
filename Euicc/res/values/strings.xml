@@ -4,6 +4,17 @@
     SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
-    <string name="sim_illustration_lottie_mappings_json">{\"sim_illustration_lottie_mappings\":[{\"devices\":[\"diting\",\"ziyi\",\"nuwa\",\"fuxi\"],\"illustration_lottie\":\"sim_illustration_lottie_bottom\"}]}</string>
-    <string name="sim_slot_mappings_json">{\"sim-slot-mappings\":[{\"devices\":[\"diting\",\"ziyi\",\"nuwa\",\"fuxi\"],\"esim-slot-ids\":[1],\"psim-slot-ids\":[0]}]}</string>
+    <!-- App Name -->
+    <string name="app_name">Xiaomi Parts</string>
+
+    <!-- ESIM -->
+    <string name="esim_title">eSIM</string>
+    <string name="esim_enable_name">Enable eSIM</string>
+    <string name="esim_summary_enabled">Enabled</string>
+    <string name="esim_summary_disabled">Disabled</string>
+    <string name="esim_summary_unsupported">eSIM is not supported on this device</string>
+    <string name="esim_warning_title">eSIM in use</string>
+    <string name="esim_warning_message">Please disable or remove your current eSIM profile before proceeding</string>
+    <string name="esim_footer_note">Enabling eSIM will disable the second physical SIM slot</string>
+    <string name="esim_footer_note_unsupported">This device does not support eSIM functionality</string>
 </resources>

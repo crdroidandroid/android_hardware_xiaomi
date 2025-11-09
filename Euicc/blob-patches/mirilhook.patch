@@ -1,0 +1,33 @@
+From 27fb0061802c7ce5cc210ceed4076ff8d3edbdc2 Mon Sep 17 00:00:00 2001
+From: Fabian Leutenegger <fabian.leutenegger@bluewin.ch>
+Date: Thu, 24 Apr 2025 08:01:26 +0200
+Subject: [PATCH] Patch MiRilHook to allow its use from com.xiaomi.settings
+
+---
+ smali/com/xiaomi/mirilhook/MiRilHook.smali | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/smali/com/xiaomi/mirilhook/MiRilHook.smali b/smali/com/xiaomi/mirilhook/MiRilHook.smali
+index a818168..5d00063 100644
+--- a/smali/com/xiaomi/mirilhook/MiRilHook.smali
++++ b/smali/com/xiaomi/mirilhook/MiRilHook.smali
+@@ -1384,7 +1384,7 @@
+ 
+     .line 8100
+     :cond_0
+-    const-string v4, "com.xiaomi.mtb"
++    const-string v4, "com.xiaomi.settings"
+ 
+     invoke-virtual {v4, v3}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
+ 
+@@ -5896,7 +5896,7 @@
+     .line 619
+     sget-object v0, Lcom/xiaomi/mirilhook/MiRilHook;->mHookUserWhiteList:Ljava/util/ArrayList;
+ 
+-    const-string v2, "com.xiaomi.mtb"
++    const-string v2, "com.xiaomi.settings"
+ 
+     invoke-virtual {v0, v2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+ 
+-- 
+2.48.1

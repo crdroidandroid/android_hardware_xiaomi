@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="android.overlay.euicc.xiaomi8450">
+
+    <overlay
+        android:isStatic="true"
+        android:priority="800"
+        android:targetPackage="android"
+        android:requiredSystemPropertyName="ro.product.model"
+        android:requiredSystemPropertyValue="+(2210129SG|2210132G|2211133G)" />
+</manifest>
