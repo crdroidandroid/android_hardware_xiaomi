@@ -26,12 +26,12 @@ android_app {
         "org.lineageos.settings.resources",
     ],
 
-    required: ["preinstalled-packages-platform-dolby.xml"],
+    required: ["preinstalled-packages-platform-dolby-xiaomi.xml"],
 }
 
 prebuilt_etc {
-    name: "preinstalled-packages-platform-dolby.xml",
-    src: "preinstalled-packages-platform-dolby.xml",
+    name: "preinstalled-packages-platform-dolby-xiaomi.xml",
+    src: "preinstalled-packages-platform-dolby-xiaomi.xml",
     sub_dir: "sysconfig",
     system_ext_specific: true,
 }
