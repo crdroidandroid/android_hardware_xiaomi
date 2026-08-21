@@ -1,41 +1,9 @@
 //
-// Copyright (C) 2024-2025 The LineageOS Project
+// Copyright (C) 2024-2026 The LineageOS Project
 //               2024 Paranoid Android
 //
 // SPDX-License-Identifier: Apache-2.0
 //
-
-soong_config_module_type {
-    name: "xiaomi_hardware_biometrics_config_default",
-    module_type: "cc_defaults",
-    config_namespace: "XIAOMI_BIOMETRICS_FINGERPRINT",
-    bool_variables: [
-        "RUN_32BIT",
-    ],
-    value_variables: [
-        "IMPL_VER",
-    ],
-    properties: [
-        "compile_multilib",
-        "cppflags",
-    ],
-}
-
-xiaomi_hardware_biometrics_config_default {
-    name: "xiaomi_hardware_biometrics_config_default",
-
-    soong_config_variables: {
-        RUN_32BIT: {
-            conditions_default: {
-                compile_multilib: "64",
-            },
-            compile_multilib: "prefer32",
-        },
-        IMPL_VER: {
-            cppflags: ["-DIMPL_%s"],
-        },
-    },
-}
 
 cc_binary {
     name: "android.hardware.biometrics.fingerprint-service.xiaomi",
